@@ -1,0 +1,15 @@
+# Ignore bundler config.
+/.bundle
+
+#
+tmp
+tmp_coffees
+
+#
+node_modules
+
+#
+*.swp
+*.swo
+*~
+.DS_Store

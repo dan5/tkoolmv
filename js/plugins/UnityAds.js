@@ -37,7 +37,8 @@
 
     CordovaUnityAds.prototype.showVideoAd = function() {
       if (this.loadedVideoAd()) {
-        return window.unityads.showVideoAd();
+        window.unityads.showVideoAd();
+        return this.status = 'isReady';
       } else {
         return console.log('not loadedVideoAd');
       }
@@ -95,13 +96,15 @@
     };
     window.unityads.onVideoAdShown = function() {
       if (isTest) {
-        return console.log('onVideoAdShown');
+        console.log('onVideoAdShown');
       }
+      return window.unityAds.status = 'isShowing';
     };
     window.unityads.onVideoAdHidden = function() {
       if (isTest) {
-        return console.log('onVideoAdHidden');
+        console.log('onVideoAdHidden');
       }
+      return window.unityAds.status = null;
     };
     window.unityads.onRewardedVideoAdLoaded = function() {
       if (isTest) {

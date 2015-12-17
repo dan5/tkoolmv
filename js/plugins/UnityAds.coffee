@@ -20,6 +20,7 @@ class CordovaUnityAds
   showVideoAd: ->
     if @loadedVideoAd()
       window.unityads.showVideoAd()
+      @status = 'isReady'
     else
       console.log 'not loadedVideoAd'
 
@@ -49,9 +50,11 @@ setup = ->
   window.unityads.onVideoAdShown = ->
     if isTest
       console.log 'onVideoAdShown'
+    window.unityAds.status = 'isShowing'
   window.unityads.onVideoAdHidden = ->
     if isTest
       console.log 'onVideoAdHidden'
+    window.unityAds.status = null
   window.unityads.onRewardedVideoAdLoaded = ->
     if isTest
       console.log 'onRewardedVideoAdLoaded'

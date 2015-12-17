@@ -12,7 +12,7 @@ unless window.unityads?
     isShowingVideoAd: -> false
     isShowingRewardedVideoAd: -> false
 
-class CordovaUnityAds
+class CordovaUnityAdsMV
   constructor: ->
     @status = null
     @has_reward = false
@@ -40,7 +40,7 @@ class CordovaUnityAds
   hasReward: -> @has_reward
   clearReward: -> @has_reward = false
 
-window.unityAds = new CordovaUnityAds()
+window.UnityAdsMV = new CordovaUnityAdsMV()
 
 setup = ->
   window.unityads.setUp gameId, videoAdPlacementId, rewardedVideoAdPlacementId, isTest
@@ -50,22 +50,22 @@ setup = ->
   window.unityads.onVideoAdShown = ->
     if isTest
       console.log 'onVideoAdShown'
-    window.unityAds.status = 'isShowing'
+    window.UnityAdsMV.status = 'isShowing'
   window.unityads.onVideoAdHidden = ->
     if isTest
       console.log 'onVideoAdHidden'
-    window.unityAds.status = null
+    window.UnityAdsMV.status = null
   window.unityads.onRewardedVideoAdLoaded = ->
     if isTest
       console.log 'onRewardedVideoAdLoaded'
   window.unityads.onRewardedVideoAdShown = ->
     if isTest
       console.log 'onRewardedVideoAdShown'
-    window.unityAds.status = 'isShowing'
+    window.UnityAdsMV.status = 'isShowing'
   window.unityads.onRewardedVideoAdHidden = ->
     if isTest
       console.log 'onRewardedVideoAdHidden'
-    window.unityAds.status = null
+    window.UnityAdsMV.status = null
   window.unityads.onRewardedVideoAdCompleted = ->
     if isTest
       console.log 'onRewardedVideoAdCompleted'

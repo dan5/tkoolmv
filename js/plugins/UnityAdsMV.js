@@ -156,43 +156,29 @@
   setup = function() {
     window.unityads.setUp(gameId, videoAdPlacementId, rewardedVideoAdPlacementId, isTest);
     window.unityads.onVideoAdLoaded = function() {
-      if (isTest) {
-        return console.log('onVideoAdLoaded');
-      }
+      return isTest && console.log('onVideoAdLoaded');
     };
     window.unityads.onVideoAdShown = function() {
-      if (isTest) {
-        console.log('onVideoAdShown');
-      }
+      isTest && console.log('onVideoAdShown');
       return window.UnityAdsMV.status = 'isShowing';
     };
     window.unityads.onVideoAdHidden = function() {
-      if (isTest) {
-        console.log('onVideoAdHidden');
-      }
+      isTest && console.log('onVideoAdHidden');
       return window.UnityAdsMV.status = null;
     };
     window.unityads.onRewardedVideoAdLoaded = function() {
-      if (isTest) {
-        return console.log('onRewardedVideoAdLoaded');
-      }
+      return isTest && console.log('onRewardedVideoAdLoaded');
     };
     window.unityads.onRewardedVideoAdShown = function() {
-      if (isTest) {
-        console.log('onRewardedVideoAdShown');
-      }
+      isTest && console.log('onRewardedVideoAdShown');
       return window.UnityAdsMV.status = 'isShowing';
     };
     window.unityads.onRewardedVideoAdHidden = function() {
-      if (isTest) {
-        console.log('onRewardedVideoAdHidden');
-      }
+      isTest && console.log('onRewardedVideoAdHidden');
       return window.UnityAdsMV.status = null;
     };
     return window.unityads.onRewardedVideoAdCompleted = function() {
-      if (isTest) {
-        console.log('onRewardedVideoAdCompleted');
-      }
+      isTest && console.log('onRewardedVideoAdCompleted');
       return this.has_reward = true;
     };
   };

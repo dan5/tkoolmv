@@ -1,3 +1,22 @@
+###:
+ * @plugindesc Unity Ads Plugin
+ * @author Dan Yamamoto
+ *
+ * @param gameID
+ * @desc
+ * @default '42517'
+ *
+ * @param isTest
+ * @desc
+ * @default true
+ *
+ * @help
+ *
+ * Plugin Command:
+ *   UnityAdsMV showRewardedVideoAd  #
+ *   isShowing                       #
+####
+
 gameId = '42517'
 videoAdPlacementId = 'defaultZone'
 rewardedVideoAdPlacementId = 'rewardedVideoZone'

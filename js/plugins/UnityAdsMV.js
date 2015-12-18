@@ -3,24 +3,78 @@
 /*:
  * @plugindesc Unity Ads Plugin
  * @author Dan Yamamoto
+ * @license MIT
  *
  * @param gameID
- * @desc
- * @default '42517'
+ * @desc Game ID
+ * @default 42517
+ *
+ * @param videoAdPlacementId
+ * @desc Video Ad Placement Id
+ * @default defaultZone
+ *
+ * @param rewardedVideoAdPlacementId
+ * @desc Rewarded Video Ad Placement Id
+ * @default rewardedVideoZone
  *
  * @param isTest
- * @desc
+ * @desc Ipunt 'true' or 'false'
  * @default true
  *
- * @help
- *
- * Plugin Command:
- *   UnityAdsMV showRewardedVideoAd  #
- *   isShowing                       #
  */
 
 (function() {
-  var CordovaUnityAdsMV, gameId, isTest, rewardedVideoAdPlacementId, setup, videoAdPlacementId;
+  var CordovaUnityAdsMV, gameId, isTest, parameters, rewardedVideoAdPlacementId, setup, videoAdPlacementId;
+
+  parameters = PluginManager.parameters('UnityAdsMV');
+
+  gameId = String(parameters['gameId'] || '42517');
+
+  videoAdPlacementId = String(parameters['videoAdPlacementId'] || 'defaultZone');
+
+  rewardedVideoAdPlacementId = String(parameters['rewardedVideoAdPlacementId'] || 'rewardedVideoZone');
+
+  isTest = !parameters['isTest'].match(/^\s*(0|off|false)?\s*$/i);
+
+  if (window.unityads == null) {
+    window.unityads = {
+      showVideoAd: function() {},
+      showRewardedVideoAd: function() {},
+      loadedVideoAd: function() {
+        return false;
+      },
+      loadedRewardedVideoAd: function() {
+        return false;
+      },
+      isShowingVideoAd: function() {
+        return false;
+      },
+      isShowingRewardedVideoAd: function() {
+        return false;
+      }
+    };
+  }
+
+  CordovaUnityAdsMV = (function() {
+    function CordovaUnityAdsMV() {
+      this.status = null;
+      this.has_reward = false;
+    }
+
+    CordovaUnityAdsMV.prototype.showVideoAd = function() {
+      if (this.loadedVideoAd()) {
+        window.unityads.showVideoAd();
+        return this.status = 'isReady';
+      } else {
+        return console.log('not loadedVideoAd');
+      }
+    };
+
+    CordovaUnityAdsMV.prototype.showRewardedVideoAd = function() {};
+
+    return CordovaUnityAdsMV;
+
+  })();
 
   gameId = '42517';
 

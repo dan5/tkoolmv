@@ -1,22 +1,54 @@
 ###:
  * @plugindesc Unity Ads Plugin
  * @author Dan Yamamoto
+ * @license MIT
  *
  * @param gameID
- * @desc
- * @default '42517'
+ * @desc Game ID
+ * @default 42517
+ *
+ * @param videoAdPlacementId
+ * @desc Video Ad Placement Id
+ * @default defaultZone
+ *
+ * @param rewardedVideoAdPlacementId
+ * @desc Rewarded Video Ad Placement Id
+ * @default rewardedVideoZone
  *
  * @param isTest
- * @desc
+ * @desc Ipunt 'true' or 'false'
  * @default true
  *
- * @help
- *
- * Plugin Command:
- *   UnityAdsMV showRewardedVideoAd  #
- *   isShowing                       #
 ####
 
+parameters = PluginManager.parameters('UnityAdsMV')
+gameId = String(parameters['gameId'] || '42517')
+videoAdPlacementId = String(parameters['videoAdPlacementId'] || 'defaultZone')
+rewardedVideoAdPlacementId = String(parameters['rewardedVideoAdPlacementId'] || 'rewardedVideoZone')
+isTest = !parameters['isTest'].match(/^\s*(0|off|false)?\s*$/i)
+
+unless window.unityads?
+  window.unityads =
+    showVideoAd: ->
+    showRewardedVideoAd: ->
+    loadedVideoAd: -> false
+    loadedRewardedVideoAd: -> false
+    isShowingVideoAd: -> false
+    isShowingRewardedVideoAd: -> false
+
+class CordovaUnityAdsMV
+  constructor: ->
+    @status = null
+    @has_reward = false
+
+  showVideoAd: ->
+    if @loadedVideoAd()
+      window.unityads.showVideoAd()
+      @status = 'isReady'
+    else
+      console.log 'not loadedVideoAd'
+
+  showRewardedVideoAd: ->
 gameId = '42517'
 videoAdPlacementId = 'defaultZone'
 rewardedVideoAdPlacementId = 'rewardedVideoZone'

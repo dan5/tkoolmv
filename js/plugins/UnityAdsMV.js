@@ -101,6 +101,18 @@
       this.has_reward = false;
     }
 
+    CordovaUnityAdsMV.prototype.isShowing = function() {
+      return this.status !== null;
+    };
+
+    CordovaUnityAdsMV.prototype.hasReward = function() {
+      return this.has_reward;
+    };
+
+    CordovaUnityAdsMV.prototype.clearReward = function() {
+      return this.has_reward = false;
+    };
+
     CordovaUnityAdsMV.prototype.showVideoAd = function() {
       if (this.loadedVideoAd()) {
         window.unityads.showVideoAd();
@@ -135,18 +147,6 @@
       return window.unityads.isShowingRewardedVideoAd();
     };
 
-    CordovaUnityAdsMV.prototype.isShowing = function() {
-      return this.status !== null;
-    };
-
-    CordovaUnityAdsMV.prototype.hasReward = function() {
-      return this.has_reward;
-    };
-
-    CordovaUnityAdsMV.prototype.clearReward = function() {
-      return this.has_reward = false;
-    };
-
     return CordovaUnityAdsMV;
 
   })();
@@ -159,27 +159,27 @@
       return isTest && console.log('onVideoAdLoaded');
     };
     window.unityads.onVideoAdShown = function() {
-      isTest && console.log('onVideoAdShown');
-      return window.UnityAdsMV.status = 'isShowing';
+      window.UnityAdsMV.status = 'isShowing';
+      return isTest && console.log('onVideoAdShown');
     };
     window.unityads.onVideoAdHidden = function() {
-      isTest && console.log('onVideoAdHidden');
-      return window.UnityAdsMV.status = null;
+      window.UnityAdsMV.status = null;
+      return isTest && console.log('onVideoAdHidden');
     };
     window.unityads.onRewardedVideoAdLoaded = function() {
       return isTest && console.log('onRewardedVideoAdLoaded');
     };
     window.unityads.onRewardedVideoAdShown = function() {
-      isTest && console.log('onRewardedVideoAdShown');
-      return window.UnityAdsMV.status = 'isShowing';
+      window.UnityAdsMV.status = 'isShowing';
+      return isTest && console.log('onRewardedVideoAdShown');
     };
     window.unityads.onRewardedVideoAdHidden = function() {
-      isTest && console.log('onRewardedVideoAdHidden');
-      return window.UnityAdsMV.status = null;
+      window.UnityAdsMV.status = null;
+      return isTest && console.log('onRewardedVideoAdHidden');
     };
     return window.unityads.onRewardedVideoAdCompleted = function() {
-      isTest && console.log('onRewardedVideoAdCompleted');
-      return this.has_reward = true;
+      this.has_reward = true;
+      return isTest && console.log('onRewardedVideoAdCompleted');
     };
   };
 

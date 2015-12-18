@@ -64,6 +64,10 @@ class CordovaUnityAdsMV
     @status = null
     @has_reward = false
 
+  isShowing: -> @status != null
+  hasReward: -> @has_reward
+  clearReward: -> @has_reward = false
+
   showVideoAd: ->
     if @loadedVideoAd()
       window.unityads.showVideoAd()
@@ -83,10 +87,6 @@ class CordovaUnityAdsMV
   isShowingVideoAd: -> window.unityads.isShowingVideoAd()
   isShowingRewardedVideoAd: -> window.unityads.isShowingRewardedVideoAd()
 
-  isShowing: -> @status != null
-  hasReward: -> @has_reward
-  clearReward: -> @has_reward = false
-
 window.UnityAdsMV = new CordovaUnityAdsMV()
 
 setup = ->
@@ -94,21 +94,21 @@ setup = ->
   window.unityads.onVideoAdLoaded = ->
     isTest and console.log 'onVideoAdLoaded'
   window.unityads.onVideoAdShown = ->
-    isTest and console.log 'onVideoAdShown'
     window.UnityAdsMV.status = 'isShowing'
+    isTest and console.log 'onVideoAdShown'
   window.unityads.onVideoAdHidden = ->
-    isTest and console.log 'onVideoAdHidden'
     window.UnityAdsMV.status = null
+    isTest and console.log 'onVideoAdHidden'
   window.unityads.onRewardedVideoAdLoaded = ->
     isTest and console.log 'onRewardedVideoAdLoaded'
   window.unityads.onRewardedVideoAdShown = ->
-    isTest and console.log 'onRewardedVideoAdShown'
     window.UnityAdsMV.status = 'isShowing'
+    isTest and console.log 'onRewardedVideoAdShown'
   window.unityads.onRewardedVideoAdHidden = ->
-    isTest and console.log 'onRewardedVideoAdHidden'
     window.UnityAdsMV.status = null
+    isTest and console.log 'onRewardedVideoAdHidden'
   window.unityads.onRewardedVideoAdCompleted = ->
-    isTest and console.log 'onRewardedVideoAdCompleted'
     @has_reward = true
+    isTest and console.log 'onRewardedVideoAdCompleted'
 
 document.addEventListener "deviceready", setup, false

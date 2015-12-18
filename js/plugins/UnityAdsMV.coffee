@@ -49,10 +49,6 @@ class CordovaUnityAdsMV
       console.log 'not loadedVideoAd'
 
   showRewardedVideoAd: ->
-gameId = '42517'
-videoAdPlacementId = 'defaultZone'
-rewardedVideoAdPlacementId = 'rewardedVideoZone'
-isTest = true
 
 unless window.unityads?
   window.unityads =

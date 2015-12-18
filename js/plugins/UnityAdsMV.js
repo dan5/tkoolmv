@@ -76,14 +76,6 @@
 
   })();
 
-  gameId = '42517';
-
-  videoAdPlacementId = 'defaultZone';
-
-  rewardedVideoAdPlacementId = 'rewardedVideoZone';
-
-  isTest = true;
-
   if (window.unityads == null) {
     window.unityads = {
       showVideoAd: function() {},
